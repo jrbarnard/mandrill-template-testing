@@ -52,14 +52,14 @@ export default class Notifications extends Vue {
   }
 
   @Watch('propNotifications')
-  onPropNotificationsChange(value: Notification[], oldValue: Notification[]) {
+  public onPropNotificationsChange(value: Notification[], oldValue: Notification[]) {
     this.notifications = value;
   }
 
   @Watch('notifications')
-  onNotificationsChange(value: Notification[], oldValue: Notification[]) {
-    let diff = value.filter((datum) => !oldValue.includes(datum));
-    
+  public onNotificationsChange(value: Notification[], oldValue: Notification[]) {
+    const diff = value.filter((datum) => !oldValue.includes(datum));
+
     diff.forEach((notification: Notification) => {
       if (notification.removeAfterCount) {
         setTimeout(() => {

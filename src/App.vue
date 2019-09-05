@@ -49,7 +49,7 @@ export default class App extends Vue {
     return this.$store.state.notifications;
   }
 
-  updateNotifications(notifications: Notification[]) {
+  public updateNotifications(notifications: Notification[]) {
     this.$store.commit('setNotifications', notifications);
   }
 }
