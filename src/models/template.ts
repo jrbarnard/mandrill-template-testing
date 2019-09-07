@@ -2,15 +2,11 @@ export interface TemplateApiDatum {
     slug: string;
     publish_name: string;
     publish_code: string;
-};
+}
 
 class Template {
-    public slug: string = '';
-    public name: string = '';
-    public code: string = '';
-
     public static makeFromApi(datum: TemplateApiDatum): Template {
-        let template = new Template();
+        const template = new Template();
 
         template.slug = datum.slug;
         template.name = datum.publish_name;
@@ -18,6 +14,11 @@ class Template {
 
         return template;
     }
+
+    public slug: string = '';
+    public name: string = '';
+    public code: string = '';
+    public renderedCode: string = '';
 }
 
 export default Template;

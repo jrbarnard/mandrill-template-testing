@@ -22,7 +22,6 @@
                   v-model="apiKey"
                 >
               </div>
-              <!-- <p class="help is-danger" v-if="!apiKey">Please fill in this field.</p> -->
             </div>
             
             <hr>
@@ -78,27 +77,24 @@ export default class Home extends Vue {
     this.notificationRef.clearNotifications();
     const client = new mandrill.Mandrill(this.apiKey);
 
-    this.notificationRef.addNotification(new Notification('Successfully set API Key', NotificationTypes.Success));
-    setTimeout(() => {
-      this.$router.push({
-        name: 'templates',
-      });
+    client.users.ping2({}, (response) => {
+      this.notificationRef.addNotification(new Notification('Successfully set API Key', NotificationTypes.Success));
+      setTimeout(() => {
+        this.$router.push({
+          name: 'templates',
+        });
+        this.submitting = false;
+      }, 500);
+    }, (response: any) => {
+      this.notificationRef.addNotification(new Notification(response.message, NotificationTypes.Danger));
       this.submitting = false;
-    }, 1000);
 
-    // client.users.ping2({}, (response) => {
-    //   this.notificationRef.addNotification(new Notification('Successfully set API Key', NotificationTypes.Success));
-    //   this.submitting = false;
-    // }, (response: any) => {
-    //   this.notificationRef.addNotification(new Notification(response.message, NotificationTypes.Danger));
-    //   this.submitting = false;
-
-    //   setTimeout(() => {
-    //     this.$router.push({
-    //       name: 'templates',
-    //     });
-    //   }, 500);
-    // });
+      setTimeout(() => {
+        this.$router.push({
+          name: 'templates',
+        });
+      }, 500);
+    });
   }
 }
 </script>

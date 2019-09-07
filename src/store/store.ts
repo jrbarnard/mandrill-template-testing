@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import settings from './settings';
+import templates from './templates';
 import Notification from '@/models/notification';
 
 Vue.use(Vuex);
@@ -8,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     settings,
+    templates,
   },
   state: {
     notifications: [] as Notification[],
