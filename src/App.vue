@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="is-fullheight">
+  <div id="app">
     <nav class="navbar is-white">
       <div class="container">
         <div class="navbar-brand">

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="template-render">
     <div class="notification is-info" v-if="!syncedTemplate">
       No template currently loaded
     </div>
-    <iframe :srcdoc="syncedTemplate.code" v-else></iframe>
+    <iframe :srcdoc="code" v-else></iframe>
   </div>
 </template>
 
@@ -14,5 +14,23 @@ import { Component, PropSync, Vue } from 'vue-property-decorator';
 @Component
 export default class Template extends Vue {
   @PropSync('template', { type: Object }) private syncedTemplate!: TemplateModel;
+  @PropSync('showRendered', { type: Boolean, default: false }) private syncedShowRendered!: boolean;
+
+  get code(): string {
+    return this.syncedShowRendered ? this.syncedTemplate.renderedCode : this.syncedTemplate.code;
+  }
 }
 </script>
+
+<style lang="scss">
+  .template-render {
+    background-color: white;
+    padding: 10px;
+    height: 100%;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+</style>
