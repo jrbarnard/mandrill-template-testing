@@ -147,6 +147,7 @@ export default class Templates extends Vue {
       return;
     }
 
+    this.currentTemplate = null;
     this.loadTemplates();
     this.addMergeVariable();
   }
