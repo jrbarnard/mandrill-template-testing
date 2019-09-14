@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import settings from './settings';
 import templates from './templates';
+import sidebar from './sidebar';
 import Notification from '@/models/notification';
 
 Vue.use(Vuex);
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     settings,
     templates,
+    sidebar,
   },
   state: {
     notifications: [] as Notification[],

@@ -31,6 +31,9 @@
       />
       <router-view/>
     </div>
+    <Sidebar
+      v-if="showSidebar"
+    />
   </div>
 </template>
 
@@ -38,15 +41,21 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Notifications from '@/components/Notifications.vue';
 import Notification from '@/models/notification';
+import Sidebar from '@/components/Sidebar.vue';
 
 @Component({
   components: {
     Notifications,
+    Sidebar,
   },
 })
 export default class App extends Vue {
   get notifications(): Notification[] {
     return this.$store.state.notifications;
+  }
+
+  get showSidebar(): boolean {
+    return this.$store.state.sidebar.show;
   }
 
   public updateNotifications(notifications: Notification[]) {
