@@ -17,7 +17,7 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Sidebar extends Vue {
     private open: boolean = false;
 
-    toggle() {
+    public toggle() {
         this.open = !this.open;
     }
 }
@@ -37,6 +37,7 @@ export default class Sidebar extends Vue {
     z-index: 1000;
     border-left: 1px solid #cccccc;
     transition: right 0.3s ease;
+    box-shadow: 7px 0px 7px 3px rgba(0,0,0,0.75);
 
     &--open {
         right: 0;
