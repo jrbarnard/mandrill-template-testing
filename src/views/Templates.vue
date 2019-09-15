@@ -122,10 +122,17 @@ export default class Templates extends Vue {
 
   set currentTemplate(currentTemplate: TemplateModel | null) {
     this.$store.commit('templates/setCurrentTemplate', currentTemplate);
-    
+
     // Show the sidebar when we select one (hide if not)
     this.$store.commit(currentTemplate ? 'sidebar/show' : 'sidebar/hide');
-    // TODO: Set sidebar component
+    this.$store.commit(
+      'sidebar/setComponent',
+      'sidebar-template-meta',
+    );
+    // import(/* webpackChunkName: "sidebarTemplateMeta" */ '../components/sidebar/TemplateMeta.vue')
+    //   .then((component) => {
+        
+    //   });
   }
 
   get showLoading(): boolean {

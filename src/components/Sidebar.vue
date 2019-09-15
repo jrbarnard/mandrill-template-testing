@@ -3,8 +3,7 @@
         <a class="sidebar__bar" href="#" @click="toggle"><i>{{ !open ? '&lt;' : '&gt;' }}</i></a>
         <div class="sidebar__inner">
             <div class="container">
-                This is a sidebar
-                TODO: Set up sidebar components for dynamic content
+                <component :is="component"></component>
             </div>
         </div>
     </div>
@@ -20,16 +19,20 @@ export default class Sidebar extends Vue {
     public toggle() {
         this.open = !this.open;
     }
+
+    get component(): string {
+        return this.$store.state.sidebar.component;
+    }
 }
 </script>
 
 <style lang="scss">
 .sidebar {
-    $width: 200px;
+    $width: 300px;
     $barWidth: 20px;
 
     position: absolute;
-    right: -200px + $barWidth;
+    right: - $width + $barWidth;
     top: 0;
     bottom: 0;
     width: $width;
