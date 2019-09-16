@@ -92,9 +92,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Notification, { NotificationTypes } from '@/models/notification';
 import Template from '@/components/Template.vue';
-import TemplateModel, { TemplateApiDatum } from '@/models/template';
-import mandrill from 'mandrill-api';
+import TemplateModel from '@/models/template';
+import Mandrill from '@/services/mandrill/mandrill';
 import Loading from '@/components/Loading.vue';
+import { TemplateApiDatum } from '@/services/mandrill/templates';
 
 interface MergeVariable {
   key: string;
@@ -163,22 +164,24 @@ export default class Templates extends Vue {
     this.addMergeVariable();
   }
 
-  public loadTemplates() {
+  public async loadTemplates() {
     this.loadingTemplates = true;
-    const client = new mandrill.Mandrill(this.$store.state.settings.apiKey);
+    const client = new Mandrill(this.$store.state.settings.apiKey);
 
-    client.templates.list({}, (response: any) => {
-      this.templates = response.map((datum: TemplateApiDatum) => {
+    try {
+      const templates = await client.templates().list();
+
+      this.templates = templates.data.map((datum: TemplateApiDatum) => {
         return TemplateModel.makeFromApi(datum);
       });
       this.loadingTemplates = false;
-    }, (response: any) => {
+    } catch (error) {
       this.$store.commit(
         'addNotification',
-        new Notification(response.message, NotificationTypes.Danger),
+        new Notification(error.message, NotificationTypes.Danger),
       );
       this.loadingTemplates = false;
-    });
+    }
   }
 
   public addMergeVariable() {
@@ -197,37 +200,40 @@ export default class Templates extends Vue {
     });
   }
 
-  public renderTemplate() {
+  public async renderTemplate() {
     if (!(this.currentTemplate instanceof TemplateModel)) {
       return;
     }
     this.rendering = true;
     this.showRendered = false;
-    const client = new mandrill.Mandrill(this.$store.state.settings.apiKey);
 
-    client.templates.render({
-      template_name: this.currentTemplate.slug,
-      template_content: {},
-      merge_vars: this.mergeVariables.map((mergeVariable) => {
-        return {
-          name: mergeVariable.key,
-          content: mergeVariable.value,
-        };
-      }),
-    }, (response: any) => {
+    const client = new Mandrill(this.$store.state.settings.apiKey);
+
+    try {
+      const renderedResponse = await client.templates().render({
+        template_name: this.currentTemplate.slug,
+        template_content: [{ name: '', content: '' }],
+        merge_vars: this.mergeVariables.map((mergeVariable) => {
+          return {
+            name: mergeVariable.key,
+            content: mergeVariable.value,
+          };
+        }),
+      });
+
       this.showRendered = true;
       this.rendering = false;
       if (!this.currentTemplate) {
         return;
       }
-      this.currentTemplate.renderedCode = response.html;
-    }, (response: any) => {
+      this.currentTemplate.renderedCode = renderedResponse.data.html;
+    } catch (error) {
       this.rendering = false;
       this.$store.commit(
         'addNotification',
-        new Notification(response.message, NotificationTypes.Danger),
+        new Notification(error.response.data.message, NotificationTypes.Danger),
       );
-    });
+    }
   }
 }
 </script>

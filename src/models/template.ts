@@ -1,23 +1,4 @@
-export interface TemplateApiDatum {
-    slug: string;
-    name: string;
-    code: string;
-    created_at: string;
-    draft_updated_at: string;
-    from_email: string;
-    from_name: string;
-    labels: string[];
-    subject: string;
-    text: string;
-    publish_name: string;
-    publish_code: string;
-    publish_from_email: string;
-    publish_from_name: string;
-    publish_subject: string;
-    publish_text: string;
-    published_at: string;
-    updated_at: string;
-}
+import { TemplateApiDatum } from '@/services/mandrill/templates';
 
 class Template {
     public static makeFromApi(datum: TemplateApiDatum, draft: boolean = false): Template {

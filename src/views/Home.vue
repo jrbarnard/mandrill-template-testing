@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import mandrill from 'mandrill-api';
+import Mandrill from '@/services/mandrill/mandrill';
 import Notification, { NotificationTypes } from '@/models/notification';
 import Notifications from '@/components/Notifications.vue';
 import { setTimeout } from 'timers';
@@ -75,26 +75,21 @@ export default class Home extends Vue {
   public submit() {
     this.submitting = true;
     this.notificationRef.clearNotifications();
-    const client = new mandrill.Mandrill(this.apiKey);
+    const client = new Mandrill(this.apiKey);
 
-    client.users.ping2({}, (response) => {
-      this.notificationRef.addNotification(new Notification('Successfully set API Key', NotificationTypes.Success));
-      setTimeout(() => {
-        this.$router.push({
-          name: 'templates',
-        });
+    client.users().ping2()
+      .then(() => {
+        this.notificationRef.addNotification(new Notification('Successfully set API Key', NotificationTypes.Success));
+        setTimeout(() => {
+          this.$router.push({
+            name: 'templates',
+          });
+          this.submitting = false;
+        }, 500);
+      }).catch((error) => {
+        this.notificationRef.addNotification(new Notification(error.response.data.message, NotificationTypes.Danger));
         this.submitting = false;
-      }, 500);
-    }, (response: any) => {
-      this.notificationRef.addNotification(new Notification(response.message, NotificationTypes.Danger));
-      this.submitting = false;
-
-      setTimeout(() => {
-        this.$router.push({
-          name: 'templates',
-        });
-      }, 500);
-    });
+      });
   }
 }
 </script>
