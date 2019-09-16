@@ -8,7 +8,7 @@ class Users {
     }
 
     public async ping2() {
-        return this.client.get<null>('users/ping2');
+        return this.client.post<null>('users/ping2');
     }
 }
 

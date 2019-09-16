@@ -5,8 +5,8 @@
     </div>
     <template v-else>
       <div class="options">
-        <a href="#" @click="showSource = false">Rendered</a>
-        <a href="#" @click="showSource = true">Source</a>
+        <a href="#" class="button" @click="showSource = false">Rendered</a>
+        <a href="#" class="button" @click="showSource = true">&lt;&gt;</a>
       </div>
       <div class="rendered" v-if="!showSource">
         <iframe :srcdoc="code"></iframe>
@@ -42,7 +42,7 @@ export default class Template extends Vue {
     height: 100%;
 
     .options {
-      
+      margin-top: -25px;
     }
 
     .rendered, .source, iframe {

@@ -44,11 +44,11 @@ class Templates {
     }
 
     public async list() {
-        return this.client.get<TemplateApiDatum[]>('templates/list');
+        return this.client.post<TemplateApiDatum[]>('templates/list');
     }
 
     public async render(params: TemplateRenderParams) {
-        return this.client.get<TemplateRenderResponse>('templates/render', params);
+        return this.client.post<TemplateRenderResponse>('templates/render', params);
     }
 }
 

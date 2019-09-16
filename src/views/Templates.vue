@@ -122,6 +122,8 @@ export default class Templates extends Vue {
   }
 
   set currentTemplate(currentTemplate: TemplateModel | null) {
+    this.showRendered = false;
+
     this.$store.commit('templates/setCurrentTemplate', currentTemplate);
 
     // Show the sidebar when we select one (hide if not)

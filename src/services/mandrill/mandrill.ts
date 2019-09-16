@@ -14,13 +14,12 @@ class Mandrill {
         this.apiKey = apiKey;
     }
 
-    public async get<T>(path: string, params: Params = {}): Promise<AxiosResponse<T>> {
-        const mergedParams = Object.assign({}, params, {
+    public async post<T>(path: string, data: Params = {}): Promise<AxiosResponse<T>> {
+        const mergedData = Object.assign({}, data, {
             key: this.apiKey,
         });
 
-        return axios.get<T>(this.root + '/' + path, {
-            params: mergedParams,
+        return axios.post<T>(this.root + '/' + path, mergedData, {
             headers: {
                 'Content-Type': 'application/json',
             },
