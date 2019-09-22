@@ -19,7 +19,7 @@
 <script lang="ts">
 import { Component, PropSync, Vue, Watch } from 'vue-property-decorator';
 import Notification from '@/models/notification';
-import { setInterval } from 'timers';
+// import { setInterval } from 'timers';
 
 @Component
 export default class Notifications extends Vue {

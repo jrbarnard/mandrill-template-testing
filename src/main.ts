@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 
 Vue.component(
   'sidebar-template-meta',
-  () => import('./components/sidebar/TemplateMeta.vue')
+  () => import('./components/sidebar/TemplateMeta.vue'),
 );
 
 new Vue({

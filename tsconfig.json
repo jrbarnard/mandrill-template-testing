@@ -15,7 +15,8 @@
       "webpack-env",
       "mocha",
       "chai",
-      "mandrill-api",
+      "codemirror",
+      "js-beautify"
     ],
     "paths": {
       "@/*": [

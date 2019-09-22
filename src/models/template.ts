@@ -47,6 +47,7 @@ class Template {
     // Non direct
     public renderedCode: string = '';
     public isDraft: boolean = false;
+    public beautifiedCode: string = ''; // Raw code run through a beautifier
 }
 
 export default Template;

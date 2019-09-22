@@ -78,7 +78,7 @@
         </template>
       </div>
 
-      <div class="template column">
+      <div class="template column is-three-fifths">
         <Template
           :template="currentTemplate"
           :show-rendered="showRendered"
@@ -132,10 +132,6 @@ export default class Templates extends Vue {
       'sidebar/setComponent',
       'sidebar-template-meta',
     );
-    // import(/* webpackChunkName: "sidebarTemplateMeta" */ '../components/sidebar/TemplateMeta.vue')
-    //   .then((component) => {
-        
-    //   });
   }
 
   get showLoading(): boolean {
