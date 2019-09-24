@@ -1,4 +1,14 @@
-# source
+# Mandrill template testing tool
+
+A tool that provides an easy way to view and test templates stored in Mandrill.
+
+## Features
+- Render templates stored in Mandrill
+- View template metadata
+- View template drafts
+- Render templates with set merge variables and template content
+- View unminified source
+- 
 
 ## Project setup
 ```
@@ -29,6 +39,3 @@ npm run lint
 ```
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

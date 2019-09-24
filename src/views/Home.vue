@@ -48,7 +48,6 @@ import { Component, Vue } from 'vue-property-decorator';
 import Mandrill from '@/services/mandrill/mandrill';
 import Notification, { NotificationTypes } from '@/models/notification';
 import Notifications from '@/components/Notifications.vue';
-// import { setTimeout } from 'timers';
 
 @Component({
   components: {
