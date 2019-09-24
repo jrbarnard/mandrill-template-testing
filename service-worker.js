@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a07105071ee2621e1fc3b7886e035754.js"
+  "/mandrill-template-testing/precache-manifest.ff923226cbee618a35266c1006e5e829.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "source"});
