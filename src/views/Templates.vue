@@ -16,7 +16,6 @@
                 >{{ template.name }}</option>
               </select>
             </div>
-            <!-- <p class="help is-danger" v-if="!apiKey">Please fill in this field.</p> -->
           </div>
         </div>
         

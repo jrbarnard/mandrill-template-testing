@@ -6,12 +6,12 @@
     <template v-show="syncedTemplate">
       <div class="options" v-if="syncedTemplate">
         <a href="#" class="button is-info" @click="showSource = !showSource">
-          {{ showSource ? 'Rendered' : 'Source' }}
+          {{ showSource ? 'View' : 'Source' }}
         </a>
         <template v-if="showSource">
           <!-- Minification -->
           <a href="#" class="button is-info" v-if="!unminified" @click="unminify">Unminify</a>
-          <a href="#" class="button is-info" v-else @click="minify">Minify</a>
+          <a href="#" class="button is-info" v-else @click="minify">Reset</a>
         </template>
       </div>
       <div class="rendered" v-show="!showSource">
@@ -63,6 +63,8 @@ export default class Template extends Vue {
       value: this.raw,
       mode: 'text/html',
       theme: 'monokai',
+      lineNumbers: true,
+      // lineWrapping: true,
     });
   }
 
@@ -82,6 +84,12 @@ export default class Template extends Vue {
   public updateCodeMirror(raw: string) {
     this.codemirror.setValue(raw);
   }
+
+  @Watch('syncedTemplate.slug')
+  public resetOptions() {
+    this.showSource = false;
+    this.unminified = false;
+  }
 }
 </script>
 
@@ -98,6 +106,10 @@ export default class Template extends Vue {
       left: 5px;
       top: 5px;
       z-index: 100;
+
+      .button {
+        margin-right: 10px;
+      }
     }
 
     &:hover {
@@ -115,25 +127,6 @@ export default class Template extends Vue {
       .CodeMirror {
         height: 100%;
       }
-      // overflow-y: auto;
-      // background-color: whitesmoke;
-      // padding: 10px;
-
-      // code {
-      //   padding: 0;
-      // }
-
-      // // Disable bulma styles for source .tag (rendered by prism)
-      // .tag {
-      //   white-space: inherit;
-      //   padding: 0;
-      //   line-height: 1;
-      //   background-color: inherit;
-      //   border-radius: 0;
-      //   justify-content: inherit;
-      //   font-size: 1em;
-      //   display: inline;
-      // }
     }
   }
 </style>
