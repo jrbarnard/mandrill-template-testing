@@ -2,6 +2,8 @@
 
 A tool that provides an easy way to view and test templates stored in Mandrill.
 
+[https://jrbarnard.github.io/mandrill-template-testing/](https://jrbarnard.github.io/mandrill-template-testing/)
+
 ## Features
 - Render templates stored in Mandrill
 - View template metadata
@@ -25,17 +27,8 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
+### Deploy
+From the master / release branch, this will deploy to the gh-pages branch, so if set up to use github pages it will deploy the latest changes.
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
+npm run deploy:pages
 ```
